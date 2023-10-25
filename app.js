@@ -1,22 +1,22 @@
-require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const helmet = require("helmet");
-const { errors } = require("celebrate");
+require('dotenv').config();
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const helmet = require('helmet');
+const { errors } = require('celebrate');
 
-const bodyParser = require("body-parser");
-const router = require("./routes/index");
-const errorHandler = require("./middleware/errorHandler");
+const bodyParser = require('body-parser');
+const router = require('./routes/index');
+const errorHandler = require('./middleware/errorHandler');
 
-const { apiLimiter } = require("./middleware/rateLimit");
+const { apiLimiter } = require('./middleware/rateLimit');
 
-// ADD CONNECTION TO DATABASE AND PORT !
+// ADD CONNECTION TO DATABASE AND PORT ! TODO
 
 const app = express();
 
 app.use(cors());
-app.options("*", cors());
+app.options('*', cors());
 
 app.use(helmet());
 app.use(apiLimiter);
@@ -25,12 +25,14 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// ADD TEMPORARY CODE FOR SERVER CRASH TEST !
+// ADD TEMPORARY CODE FOR SERVER CRASH TEST ! TODO
 
 app.use(router);
 
 app.use(errors());
 app.use(errorHandler);
+
+// connect mongoose below ! TODO
 
 /* mongoose
   .connect(DB_ADDRESS)
