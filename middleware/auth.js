@@ -1,24 +1,28 @@
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
-// const { JWT_SECRET } = require("..."); TODO
+// const { NODE_ENV, JWT_SECRET } = require('../utils/config');
+const { NODE_ENV, JWT_SECRET } = process.env;
 
-const UnauthorizeError = require("../errors/UnauthorizeError");
-const { ERROR_MESSAGE } = require("../utils/constants");
+const UnauthorizedError = require('../errors/UnauthorizedError');
+const { ERROR_MESSAGE } = require('../utils/constants');
 
 const auth = (req, res, next) => {
   const { authorization } = req.headers;
 
-  if (!authorization || !authorization.startsWith("Bearer ")) {
-    return next(new UnauthorizeError(ERROR_MESSAGE.UNAUTHORIZED));
+  if (!authorization || !authorization.startsWith('Bearer ')) {
+    return next(new UnauthorizedError(ERROR_MESSAGE.UNAUTHORIZED));
   }
 
-  const token = authorization.replace("Bearer ", "");
+  const token = authorization.replace('Bearer ', '');
   let payload;
 
   try {
-    payload = jwt.verify(token, JWT_SECRET);
+    payload = jwt.verify(
+      token,
+      NODE_ENV === 'production' ? JWT_SECRET : 'super-dev-secret'
+    );
   } catch (err) {
-    return next(new UnauthorizeError(ERROR_MESSAGE.UNAUTHORIZED));
+    return next(new UnauthorizedError(ERROR_MESSAGE.UNAUTHORIZED));
   }
 
   req.user = payload; // payload assigned to request object

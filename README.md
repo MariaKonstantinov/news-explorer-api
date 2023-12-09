@@ -4,19 +4,17 @@
 
 ### :four_leaf_clover: Overview
 
-- Project Concept
-- Project Technologies and Features
+- General Project Concept
+- This Project Technologies and Features
 - Project Link
 
-**:four_leaf_clover: Project Concept**
+**:four_leaf_clover: General Project Concept**
 
 This project represents a service where users can search for news articles and save them to their profiles.
 
-**:four_leaf_clover: Project Technologies and Features**
-
-This is a backend part of News Explorer Final Project at TripleTen. Deployed on Google Cloud VM. The project was created with Express and MongoDB.
-
 The website has 2 main features:
+
+Front-End Implementation:
 
 1. When the user enters a keyword in the search bar, the website sends a request to the News API service, finds all the relevant articles over the last week, and displays a list of cards for each of them.
 
@@ -27,6 +25,10 @@ Back-End Implementation - two APIs:
 1. The News API, which returns JSON data containing headlines, bylines and other data from keyword searches. Since requests will be sent to News API from the browser, there is no need to write the back end.
 
 2. An API for user authentication and saving articles. Created this back-end server independently.
+
+**:four_leaf_clover: This Project Technologies and Features**
+
+This Project is a backend part of News Explorer Final Project at TripleTen. It has custom RESTful API for user authentication and saving articles and it is deployed on Google Cloud VM. The project was created with Express and MongoDB.
 
 Technologies used:
 
