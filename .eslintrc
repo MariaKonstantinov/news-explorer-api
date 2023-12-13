@@ -20,6 +20,7 @@
         "vars": "all",
         "varsIgnorePattern": "^password$"
       }
-    ]
+    ],
+    "quotes": "off"
   }
 }

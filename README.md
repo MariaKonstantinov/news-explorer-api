@@ -36,4 +36,4 @@ Technologies used:
 
 **:four_leaf_clover: Project Link**
 
-- [Project Link]()
+- [Link to RESTful API](https://api.news-explorer.click)

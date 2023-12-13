@@ -1,15 +1,15 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
-// const { JWT_SECRET } = require('...'); TODO
+const { JWT_SECRET } = require('../utils/config');
 
-const User = require("../models/user");
+const User = require('../models/user');
 
-const ConflictError = require("../errors/ConflictError");
-const NotFoundError = require("../errors/NotFoundError");
-const UnauthorizedError = require("../errors/UnauthorizedError");
-const BadReqError = require("../errors/BadReqError");
-const { ERROR_MESSAGE } = require("../utils/constants");
+const ConflictError = require('../errors/ConflictError');
+const NotFoundError = require('../errors/NotFoundError');
+const UnauthorizedError = require('../errors/UnauthorizedError');
+const BadReqError = require('../errors/BadReqError');
+const { ERROR_MESSAGE } = require('../utils/constants');
 
 const userLogin = (req, res, next) => {
   const { email, password } = req.body;
@@ -17,13 +17,13 @@ const userLogin = (req, res, next) => {
   User.findUserByCredentials(email, password)
     .then((data) => {
       const token = jwt.sign({ _id: data._id }, JWT_SECRET, {
-        expiresIn: "7d",
+        expiresIn: '7d',
       });
       const { password, ...user } = data._doc;
       res.send({ data: user, token });
     })
     .catch(() => {
-      next(new UnauthorizedError("Incorrect email or password"));
+      next(new UnauthorizedError('Incorrect email or password'));
     });
 };
 
@@ -51,8 +51,8 @@ const createUser = (req, res, next) => {
       res.status(201).send({ data: user });
     })
     .catch((err) => {
-      if (err.name === "ValidationError") {
-        next(new BadReqError("Invalid email or password"));
+      if (err.name === 'ValidationError') {
+        next(new BadReqError('Invalid email or password'));
       } else {
         next(err);
       }
