@@ -22,7 +22,7 @@ Front-End Implementation:
 
 Back-End Implementation - two APIs:
 
-1. The News API, which returns JSON data containing headlines, bylines and other data from keyword searches. Since requests will be sent to News API from the browser, there is no need to write the back end.
+1. The News API, which returns JSON data containing headlines, bylines and other data from keyword searches.
 
 2. An API for user authentication and saving articles. Created this back-end server independently.
 
